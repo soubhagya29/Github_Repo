@@ -104,33 +104,69 @@ def get_significant_parameters(model, feature_columns):
     else:
         return pd.DataFrame({"Message": ["No feature importance available"]})
 
+# # Future Predictions
+
+# def predict_next_six_months(model, data, feature_columns, target):
+#     """
+#     Predicts target variable for all factories and locations for the next 6 months (Jan 2025 - June 2025)
+#     and returns the predictions in a DataFrame.
+#     """
+#     factories = data['Factory'].unique()
+#     locations = data['Location'].unique()
+
+#     future_data = pd.DataFrame()
+#     for factory in factories:
+#         for location in locations:
+#             temp_data = pd.DataFrame({
+#                 'Year': [2025] * 6,
+#                 'Month': [1, 2, 3, 4, 5, 6],
+#                 'Factory': [factory] * 6,
+#                 'Location': [location] * 6
+#             })
+#             for col in feature_columns:
+#                 if col not in temp_data.columns:
+#                     temp_data[col] = data[col].mean()
+
+#             future_data = pd.concat([future_data, temp_data], ignore_index=True)
+
+#     predictions = model.predict(future_data[feature_columns])
+#     future_data[f'Predicted {target}'] = predictions
+#     return future_data
+
 # Future Predictions
 
-def predict_next_six_months(model, data, feature_columns, target):
+def predict_next_six_months_weekly(model, data, feature_columns, target):
     """
-    Predicts target variable for all factories and locations for the next 6 months (Jan 2025 - June 2025)
+    Predicts target variable for all factories and locations for the next 6 months (weekly predictions)
     and returns the predictions in a DataFrame.
     """
     factories = data['Factory'].unique()
     locations = data['Location'].unique()
 
     future_data = pd.DataFrame()
+    
+    # Generate weekly data for the next 6 months (26 weeks)
+    weeks = pd.date_range(start='2025-01-01', end='2025-06-30', freq='W-MON')
+
     for factory in factories:
         for location in locations:
             temp_data = pd.DataFrame({
-                'Year': [2025] * 6,
-                'Month': [1, 2, 3, 4, 5, 6],
-                'Factory': [factory] * 6,
-                'Location': [location] * 6
+                'Date': weeks,
+                'Factory': [factory] * len(weeks),
+                'Location': [location] * len(weeks)
             })
+
+            # Add feature columns with mean values if not present
             for col in feature_columns:
                 if col not in temp_data.columns:
                     temp_data[col] = data[col].mean()
 
             future_data = pd.concat([future_data, temp_data], ignore_index=True)
 
+    # Make predictions
     predictions = model.predict(future_data[feature_columns])
     future_data[f'Predicted {target}'] = predictions
+
     return future_data
 
 # Correlation Analysis
