@@ -104,7 +104,7 @@ def get_significant_parameters(model, feature_columns):
     else:
         return pd.DataFrame({"Message": ["No feature importance available"]})
 
-# # Future Predictions
+# Future Predictions for 6 months 
 
 # def predict_next_six_months(model, data, feature_columns, target):
 #     """
