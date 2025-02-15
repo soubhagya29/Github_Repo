@@ -1,0 +1,34 @@
+{
+  "production_volume_model": {
+    "Year": {"data_type": "integer", "description": "Year of production entry"},
+    "Month": {"data_type": "integer", "description": "Month of production entry"},
+    "Machine Utilization (%)": {"data_type": "float", "description": "Percentage of machine utilization"},
+    "Batch Quality (Pass %)": {"data_type": "float", "description": "Percentage of batches passed quality checks"},
+    "Breakdowns (count)": {"data_type": "integer", "description": "Number of machine breakdowns"},
+    "Machine Age (years)": {"data_type": "float", "description": "Age of the machine in years"},
+    "Predicted Production Volume (units)": {"data_type": "float", "description": "Predicted number of units produced"}
+  },
+  "machine_utilization_model": {
+    "Location": {"data_type": "integer", "description": "Encoded location identifier"},
+    "Machine Type": {"data_type": "integer", "description": "Encoded machine type identifier"},
+    "Batch": {"data_type": "integer", "description": "Batch identifier"},
+    "Shift": {"data_type": "integer", "description": "Shift identifier"},
+    "Operator Training Level": {"data_type": "integer", "description": "Operator training level"},
+    "Supplier": {"data_type": "integer", "description": "Supplier identifier"},
+    "Predicted Machine Utilization (%)": {"data_type": "float", "description": "Predicted percentage of machine utilization"}
+  },
+  "revenue_model": {
+    "Raw Material Quality": {"data_type": "float", "description": "Quality level of raw materials"},
+    "Supplier Delays (days)": {"data_type": "float", "description": "Number of days raw materials were delayed"},
+    "Supplier": {"data_type": "integer", "description": "Supplier identifier"},
+    "Market Demand Index": {"data_type": "float", "description": "Index measuring market demand"},
+    "Predicted Revenue ($)": {"data_type": "float", "description": "Predicted revenue"}
+  },
+  "profit_margin_model": {
+    "Cost of Downtime ($)": {"data_type": "float", "description": "Cost incurred due to machine downtime"},
+    "Breakdowns (count)": {"data_type": "integer", "description": "Number of machine breakdowns"},
+    "Safety Incidents (count)": {"data_type": "integer", "description": "Number of safety incidents reported"},
+    "Production Volume (units)": {"data_type": "float", "description": "Total number of units produced"},
+    "Predicted Profit Margin (%)": {"data_type": "float", "description": "Predicted profit margin percentage"}
+  }
+}
